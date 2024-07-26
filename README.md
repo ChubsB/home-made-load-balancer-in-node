@@ -1,2 +1,2 @@
-# load-balancer-in-go
-A home-made load balancer in go 
+# home-made-load-balancer-in-node
+A home-made load balancer in node.js
