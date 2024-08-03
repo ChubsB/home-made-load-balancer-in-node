@@ -3,6 +3,9 @@ const http = require('http');
 const hostname = '127.0.0.1';
 const port = 80;
 
+const servers = [3000, 3001]
+let serverPointer = 0
+
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     console.log(`Received request from ${req.socket.remoteAddress}`);
@@ -12,7 +15,7 @@ const server = http.createServer((req, res) => {
     console.log(`Accept: ${req.headers.accept}`);
     const options = {
       hostname: hostname,
-      port: 3000,
+      port: servers[serverPointer],
       path: '/',
       method: 'GET',
       headers: {
@@ -42,6 +45,10 @@ const server = http.createServer((req, res) => {
   } else {
     res.statusCode = 404;
     res.end('Not Found');
+  }
+  serverPointer++
+  if(serverPointer >= servers.length) {
+    serverPointer = 0
   }
 });
 
